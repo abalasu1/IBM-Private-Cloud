@@ -19,5 +19,5 @@ spec:
     type: Git
   strategy:
     dockerStrategy:
-      dockerfilePath: ./
+      dockerfilePath: ./Dockerfile
     type: Source
