@@ -1,0 +1,15 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  labels:
+    app: subtract
+  name: subtract
+  namespace: calculator
+spec:
+  lookupPolicy:
+    local: false
+status:
+  dockerImageRepository: docker-registry.default.svc:5000/calculator/subtract
+  tags:
+  - items:
+    tag: latest
