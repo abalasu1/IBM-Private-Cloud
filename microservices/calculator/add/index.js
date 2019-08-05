@@ -23,9 +23,10 @@ app.get('/basicop/add', cors(), function(request, response)
 });
 
 // start server on the specified port and binding host
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
+// var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-app.listen(port, ipaddress, function() {
+app.listen(port, function() {
+//app.listen(port, ipaddress, function() {
 	// print a message when the server starts listening
 	console.log("Server listening ...");
 });
