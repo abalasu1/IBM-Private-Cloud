@@ -1,5 +1,4 @@
 FROM golang:alpine AS build-env
-RUN mkdir app
 WORKDIR /app
 ADD main.go /app
 RUN cd /app && go build -o goapp
@@ -11,5 +10,5 @@ RUN apk update && apk add ca-certificates && \
 WORKDIR /app
 COPY --from=build-env /app/goapp /app
 
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ./goapp
