@@ -1,5 +1,5 @@
 FROM golang:alpine AS build-env
-MKDIR /app
+RUN mkdir app
 WORKDIR /app
 ADD main.go /app
 RUN cd /app && go build -o goapp
