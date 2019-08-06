@@ -1,7 +1,6 @@
 FROM golang:alpine AS build-env
-WORKDIR /app
-ADD main.go /app
-COPY . / -> COPY . /app
+RUN mkdir /app
+COPY main.go  /app/main.go
 RUN cd /app && go build -o goapp
 
 FROM alpine
