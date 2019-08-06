@@ -18,9 +18,6 @@ spec:
       uri: https://github.com/abalasu1/IBM-Private-Cloud.git
     type: Git
   strategy:
-    sourceStrategy:
-      from:
-        kind: ImageStreamTag
-        name: nodejs:10
-        namespace: openshift
+    dockerStrategy:
+      dockerfilePath: ./Dockerfile
     type: Source
