@@ -23,7 +23,7 @@ app.use(bodyParser.json())
 var publisher  = redis.createClient(process.env.REDISURI || 'redis://redis:6379/0');*/
 
 var opserviceoptions = {
-  host: process.env.OPSERVICEHOST || 'http://compositeop:8080',
+  host: process.env.OPSERVICEHOST || 'http://compositeop',
   port: process.env.OPSERVICEPORT || 8080,
   path: '/compositeop/eval',
   headers: {
