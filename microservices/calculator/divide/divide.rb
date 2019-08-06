@@ -1,6 +1,6 @@
 require 'webrick'
 
-server = WEBrick::HTTPServer.new(:Port => 80)
+server = WEBrick::HTTPServer.new(:Port => 8080)
 
 class Divide < WEBrick::HTTPServlet::AbstractServlet
     def is_number?
