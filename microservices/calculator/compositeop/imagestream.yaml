@@ -2,14 +2,14 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   labels:
-    app: multiply
-  name: multiply
+    app: compositeop
+  name: compositeop
   namespace: calculator
 spec:
   lookupPolicy:
     local: false
 status:
-  dockerImageRepository: docker-registry.default.svc:5000/calculator/multiply
+  dockerImageRepository: docker-registry.default.svc:5000/calculator/compositeop
   tags:
   - items:
     tag: latest

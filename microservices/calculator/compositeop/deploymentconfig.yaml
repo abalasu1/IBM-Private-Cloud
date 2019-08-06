@@ -2,13 +2,13 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    app: add
-  name: add
+    app: compositeop
+  name: compositeop
   namespace: calculator
 spec:
   replicas: 1
   selector:
-    deploymentconfig: add
+    deploymentconfig: compositeop
   strategy:
     activeDeadlineSeconds: 21600
     rollingParams:
@@ -21,13 +21,13 @@ spec:
   template:
     metadata:
       labels:
-        app: add
-        deploymentconfig: add
+        app: compositeop
+        deploymentconfig: compositeop
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/calculator/add
+      - image: docker-registry.default.svc:5000/calculator/compositeop
         imagePullPolicy: Always
-        name: add
+        name: compositeop
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -36,10 +36,10 @@ spec:
   - imageChangeParams:
       automatic: true
       containerNames:
-      - add
+      - compositeop
       from:
         kind: ImageStreamTag
-        name: add:latest
+        name: compositeop:latest
         namespace: calculator
     type: ImageChange
   - type: ConfigChange
