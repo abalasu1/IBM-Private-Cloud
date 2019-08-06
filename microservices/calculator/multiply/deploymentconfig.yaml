@@ -2,13 +2,13 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   labels:
-    app: subtract
-  name: subtract
+    app: multiply
+  name: multiply
   namespace: calculator
 spec:
   replicas: 1
   selector:
-    deploymentconfig: subtract
+    deploymentconfig: multiply
   strategy:
     activeDeadlineSeconds: 21600
     rollingParams:
@@ -21,13 +21,13 @@ spec:
   template:
     metadata:
       labels:
-        app: subtract
-        deploymentconfig: subtract
+        app: multiply
+        deploymentconfig: multiply
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/calculator/subtract
+      - image: docker-registry.default.svc:5000/calculator/multiply
         imagePullPolicy: Always
-        name: subtract
+        name: multiply
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -36,10 +36,10 @@ spec:
   - imageChangeParams:
       automatic: true
       containerNames:
-      - subtract
+      - multiply
       from:
         kind: ImageStreamTag
-        name: subtract:latest
+        name: multiply:latest
         namespace: calculator
     type: ImageChange
   - type: ConfigChange

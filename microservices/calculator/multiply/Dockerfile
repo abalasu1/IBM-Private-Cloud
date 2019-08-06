@@ -7,6 +7,7 @@ FROM alpine
 RUN apk update && apk add ca-certificates && \
     update-ca-certificates && rm -rf /var/cache/apk/*
 
+RUN mkdir /app
 WORKDIR /app
 COPY --from=build-env /app/goapp /app
 
