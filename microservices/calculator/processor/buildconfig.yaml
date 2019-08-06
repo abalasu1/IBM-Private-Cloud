@@ -2,17 +2,17 @@ apiVersion: build.openshift.io/v1
 kind: BuildConfig
 metadata:
   labels:
-    app: processor
-  name: processor
+    app: ui
+  name: ui
   namespace: calculator
 spec:
   output:
     to:
       kind: ImageStreamTag
-      name: processor:latest
+      name: ui:latest
   runPolicy: Serial
   source:
-    contextDir: microservices/calculator/processor
+    contextDir: microservices/calculator/ui
     git:
       ref: master
       uri: https://github.com/abalasu1/IBM-Private-Cloud.git

@@ -2,14 +2,14 @@ apiVersion: image.openshift.io/v1
 kind: ImageStream
 metadata:
   labels:
-    app: processor
-  name: processor
+    app: ui
+  name: ui
   namespace: calculator
 spec:
   lookupPolicy:
     local: false
 status:
-  dockerImageRepository: docker-registry.default.svc:5000/calculator/processor
+  dockerImageRepository: docker-registry.default.svc:5000/calculator/ui
   tags:
   - items:
     tag: latest
