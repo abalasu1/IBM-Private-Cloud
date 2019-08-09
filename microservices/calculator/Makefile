@@ -114,7 +114,7 @@ test-compositeop:
 
 init-processor:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./processor/service.yaml  | oc apply -f -
-	-sed -e 's~<PROJECT>~calculator~g' ./processor/route.yaml  | oc apply -f -	
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./processor/route.yaml  | oc apply -f -	
 
 build-processor:
 	-sed -e 's~<CONTAINER>~$(PROCESSOR)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./processor/imagestream.yaml  | oc apply -f -
@@ -132,6 +132,7 @@ test-processor:
 
 init-ui:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./ui/service.yaml  | oc apply -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./ui/route.yaml  | oc apply -f -	
 
 build-ui:
 	-sed -e 's~<CONTAINER>~$(UI)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./ui/imagestream.yaml  | oc apply -f -
