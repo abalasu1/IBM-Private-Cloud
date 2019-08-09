@@ -1,10 +1,10 @@
-apiVersion: bprocessorld.openshift.io/v1
-kind: BprocessorldConfig
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
 metadata:
   labels:
     app: processor
   name: processor
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   output:
     to:
@@ -15,7 +15,7 @@ spec:
     contextDir: microservices/calculator/processor
     git:
       ref: master
-      uri: https://github.com/abalasu1/IBM-Private-Cloud.git
+      uri: <GITHUBREPO>
     type: Git
   strategy:
     dockerStrategy:

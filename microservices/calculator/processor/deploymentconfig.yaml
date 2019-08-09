@@ -4,7 +4,7 @@ metadata:
   labels:
     app: processor
   name: processor
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   replicas: 1
   selector:
@@ -25,7 +25,7 @@ spec:
         deploymentconfig: processor
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/calculator/processor
+      - image: <CONTAINER>
         imagePullPolicy: Always
         name: processor
         ports:

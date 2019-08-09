@@ -4,7 +4,7 @@ metadata:
   labels:
     app: ui
   name: ui
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   ports:
   - name: 8080-tcp

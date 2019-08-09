@@ -4,7 +4,7 @@ metadata:
   labels:
     app: divide
   name: divide
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   replicas: 1
   selector:
@@ -25,7 +25,7 @@ spec:
         deploymentconfig: divide
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/calculator/divide
+      - image: <CONTAINER>
         imagePullPolicy: Always
         name: divide
         ports:

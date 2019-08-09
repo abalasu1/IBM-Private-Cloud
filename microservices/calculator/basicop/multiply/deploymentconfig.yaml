@@ -4,7 +4,7 @@ metadata:
   labels:
     app: multiply
   name: multiply
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   replicas: 1
   selector:
@@ -25,7 +25,7 @@ spec:
         deploymentconfig: multiply
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/calculator/multiply
+      - image: <CONTAINER>
         imagePullPolicy: Always
         name: multiply
         ports:

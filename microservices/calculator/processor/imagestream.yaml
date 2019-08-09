@@ -4,12 +4,12 @@ metadata:
   labels:
     app: processor
   name: processor
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   lookupPolicy:
     local: false
 status:
-  dockerImageRepository: docker-registry.default.svc:5000/calculator/processor
+  dockerImageRepository: <CONTAINER>
   tags:
   - items:
     tag: latest

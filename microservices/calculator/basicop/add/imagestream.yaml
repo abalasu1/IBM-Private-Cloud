@@ -4,12 +4,12 @@ metadata:
   labels:
     app: add
   name: add
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   lookupPolicy:
-    local: false
+    local: true
 status:
-  dockerImageRepository: docker-registry.default.svc:5000/calculator/add
+  dockerImageRepository: <CONTAINER>
   tags:
   - items:
     tag: latest

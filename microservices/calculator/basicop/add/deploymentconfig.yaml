@@ -4,7 +4,7 @@ metadata:
   labels:
     app: add
   name: add
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   replicas: 1
   selector:
@@ -25,7 +25,7 @@ spec:
         deploymentconfig: add
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/calculator/add
+      - image: <CONTAINER>
         imagePullPolicy: Always
         name: add
         ports:

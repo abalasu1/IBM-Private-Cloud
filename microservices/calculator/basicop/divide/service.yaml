@@ -4,7 +4,7 @@ metadata:
   labels:
     app: divide
   name: divide
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   ports:
   - name: 8080-tcp

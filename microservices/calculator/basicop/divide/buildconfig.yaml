@@ -4,7 +4,7 @@ metadata:
   labels:
     app: divide
   name: divide
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   output:
     to:
@@ -12,7 +12,7 @@ spec:
       name: divide:latest
   runPolicy: Serial
   source:
-    contextDir: microservices/calculator/divide
+    contextDir: microservices/calculator/basicop/divide
     git:
       ref: master
       uri: https://github.com/abalasu1/IBM-Private-Cloud.git

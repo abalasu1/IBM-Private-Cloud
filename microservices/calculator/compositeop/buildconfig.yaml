@@ -4,7 +4,7 @@ metadata:
   labels:
     app: compositeop
   name: compositeop
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   output:
     to:
@@ -15,7 +15,7 @@ spec:
     contextDir: microservices/calculator/compositeop
     git:
       ref: master
-      uri: https://github.com/abalasu1/IBM-Private-Cloud.git
+      uri: <GITHUBREPO>
     type: Git
   strategy:
     dockerStrategy:

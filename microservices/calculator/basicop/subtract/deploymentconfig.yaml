@@ -4,7 +4,7 @@ metadata:
   labels:
     app: subtract
   name: subtract
-  namespace: calculator
+  namespace: <PROJECT>
 spec:
   replicas: 1
   selector:
@@ -25,7 +25,7 @@ spec:
         deploymentconfig: subtract
     spec:
       containers:
-      - image: docker-registry.default.svc:5000/calculator/subtract
+      - image: <CONTAINER>
         imagePullPolicy: Always
         name: subtract
         ports:
