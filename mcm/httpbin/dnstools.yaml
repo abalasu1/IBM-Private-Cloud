@@ -1,0 +1,36 @@
+apiVersion: app.ibm.com/v1alpha1
+kind: Deployable
+metadata:
+  name: dnstool-deployable
+  annotations:
+    app.ibm.com/is-local-deployable: "false"
+spec:
+  template:
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: dnstool
+      namespace: dnstools
+    spec:
+      selector:
+        matchLabels:
+          app: dnstool
+      replicas: 1
+      template:
+        metadata:
+          labels:
+            app: dnstool
+        spec:
+          containers:
+          - image: docker.io/infoblox/dnstools:latest
+            imagePullPolicy: IfNotPresent
+            name: dnstool
+            command: ["/bin/sleep", "3650d"]
+  dependencies:
+  - name: httpbin
+    namespace: httpbin
+    kind: Service
+  placement:
+    clusters:
+    - name: us-svl
+      name: local-cluster

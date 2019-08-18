@@ -1,0 +1,15 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: simpleapp
+  namespace: simpleapp
+  labels:
+    app: simpleapp
+placementRef:
+  apiGroup: mcm.ibm.com
+  kind: PlacementPolicy
+  name: simpleapp
+subjects:
+- apiGroup: mcm.ibm.com
+  kind: Deployable
+  name: simpleapp

@@ -7,7 +7,7 @@ BASICOPADD=$(DOCKERREPOSITORY)/$(PROJECT)/add
 BASICOPSUB=$(DOCKERREPOSITORY)/$(PROJECT)/subtract
 BASICOPMUL=$(DOCKERREPOSITORY)/$(PROJECT)/multiply
 BASICOPDIV=$(DOCKERREPOSITORY)/$(PROJECT)/divide
-COMPOSITOP=$(DOCKERREPOSITORY)/$(PROJECT)/compositeop
+COMPOSITEOP=$(DOCKERREPOSITORY)/$(PROJECT)/compositeop
 PROCESSOR=$(DOCKERREPOSITORY)/$(PROJECT)/processor
 UI=$(DOCKERREPOSITORY)/$(PROJECT)/ui
 
@@ -17,10 +17,24 @@ FORTIO_POD=$(shell kubectl get pod -n $(PROJECT) -l app=fortio -o jsonpath='{.it
 DEBUG_POD=$(shell kubectl get pod -n $(PROJECT) -l app=curl -o jsonpath='{.items[0].metadata.name}')
 
 init:
-	-bash -c 'oc new-project $(PROJECT)'		
+	-bash -c 'oc new-project $(PROJECT)'
 
 clean:
 	-bash -c 'oc delete project $(PROJECT)'
+
+init-istio:
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/service.yaml  | oc apply -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/gateway.yaml  | oc apply -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/virtualservice.yaml  | oc apply -f -	
+
+deploy-istio:	
+	-sed -e 's~<BASICOPADD>~$(BASICOPADD)~g' -e 's~<BASICOPSUB>~$(BASICOPSUB)~g' -e 's~<BASICOPMUL>~$(BASICOPMUL)~g' -e 's~<BASICOPDIV>~$(BASICOPDIV)~g' -e 's~<COMPOSITEOP>~$(COMPOSITEOP)~g' -e 's~<PROCESSOR>~$(PROCESSOR)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./istio/deployment.yaml  | oc apply -f -
+
+clean-istio:
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/service.yaml  | oc delete -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/gateway.yaml  | oc delete -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/virtualservice.yaml  | oc delete -f -
+	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/deployment.yaml  | oc delete -f -	
 
 init-add:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/service.yaml  | oc apply -f -
@@ -30,7 +44,7 @@ build-add:
 	-sed -e 's~<CONTAINER>~$(BASICOPADD)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/imagestream.yaml  | oc apply -f -
 	-sed -e 's~<GITHUBREPO>~$(GITHUBREPO)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/buildconfig.yaml  | oc apply -f -	
 	oc start-build add
-	
+
 deploy-add:
 	-sed -e 's~<CONTAINER>~$(BASICOPADD)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/deploymentconfig.yaml  | oc apply -f -
 

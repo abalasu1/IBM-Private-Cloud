@@ -1,0 +1,13 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: default-binding-prod
+  namespace: mcm
+placementRef:
+  name: default-placement-prod
+  kind: PlacementPolicy
+  apiGroup: mcm.ibm.com
+subjects:
+- name: default-prod
+  kind: Policy
+  apiGroup: policy.mcm.ibm.com

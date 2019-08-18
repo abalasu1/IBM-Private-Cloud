@@ -1,0 +1,15 @@
+apiVersion: mcm.ibm.com/v1alpha1
+kind: PlacementBinding
+metadata:
+  name: multiservicesapp
+  namespace: multiservicesapp
+  labels:
+    app: multiservicesapp
+placementRef:
+  apiGroup: mcm.ibm.com
+  kind: PlacementPolicy
+  name: multiservicesapp
+subjects:
+- apiGroup: mcm.ibm.com
+  kind: Deployable
+  name: multiservicesapp
