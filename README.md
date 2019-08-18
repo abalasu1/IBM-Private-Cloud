@@ -4,9 +4,9 @@
 ### Table of Contents:
 - Mcm:
 
-[simpleapp](Mcm/simpleapp): Simple Nginx application deployed in a multi cloud manager environment.
+[simpleapp](mcm/simpleapp): Simple Nginx application deployed in a multi cloud manager environment.
 
-[guestbook](Mcm/guestbook): Guestbook application with a frontend and redis master & slave.
+[guestbook](mcm/guestbook): Guestbook application with a frontend and redis master & slave.
 
 ## Authors
 Arun Balasubramanyan

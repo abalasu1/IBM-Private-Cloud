@@ -9,5 +9,5 @@ spec:
   deployer:
     kind: helm
     helm:
-      chartURL: https://github.com/abalasu1/IBM-Cloud-Private/raw/master/Mcm/charts/simpleapp.tgz
+      chartURL: https://github.com/abalasu1/IBM-Private-Cloud/raw/master/mcm/charts/simpleapp.tgz
       namespace: simpleapp
