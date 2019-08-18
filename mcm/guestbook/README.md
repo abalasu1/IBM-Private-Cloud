@@ -5,13 +5,13 @@ Install instructions:
 
 - Set up kubectl and helm cli 
 
-- cd "Mcm/guestbook" (browse to the guestbook folder)
+- cd "mcm/guestbook" (browse to the guestbook folder)
 
-- helm install guestbook --name=gbapp --namespace=guestbook
+- helm install guestbook/application --name=gbapp --namespace=guestbook
 
 - Edit placement policy to move application from one cluster to another
 
-- kubectl apply -f compliance
+- kubectl apply -f guestbook/compliance
 
 ## Chart Details
 This chart defines the guestbook application using the kubernetes application definition and the extensions provided by IBM Multicloud Manager to deploy and mamnage the application.  This allows users to deploy the application to one or more cluster and asociate the application deployment to compliance policies.  Using this model enables an application helth dashboard with details of the PODS that support the applicstion.
