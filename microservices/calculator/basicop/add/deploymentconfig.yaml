@@ -3,11 +3,11 @@ kind: DeploymentConfig
 metadata:
   labels:
     app: add
-  annotations:
-    sidecar.istio.io/inject: "<AUTOINJECT>"
   name: add
   namespace: <PROJECT>
 spec:
+  annotations:
+    sidecar.istio.io/inject: "<AUTOINJECT>"
   replicas: 1
   selector:
     deploymentconfig: add
