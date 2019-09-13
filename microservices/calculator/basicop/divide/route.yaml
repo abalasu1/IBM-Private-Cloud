@@ -6,7 +6,7 @@ metadata:
   name: divide
   namespace: <PROJECT>
 spec:
-  host: divide-calculator.apps.bank01.com
+  host: <DOMAIN>
   path: /basicop/divide
   port:
     targetPort: 8080-tcp

@@ -31,6 +31,17 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
+        env:
+        - name: VERSION
+          value: "v1"
+        - name: ADDURI
+          value: "http://add/basicop/add"
+        - name: SUBURI
+          value: "http://subtract/basicop/subtract"
+        - name: MULURI
+          value: "http://multiply/basicop/multiply"
+        - name: DIVURI
+          value: "http://divide/basicop/divide"          
   test: false
   triggers:
   - imageChangeParams:

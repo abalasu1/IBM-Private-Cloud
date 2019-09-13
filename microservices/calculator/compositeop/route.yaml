@@ -6,7 +6,7 @@ metadata:
   name: compositeop-mean
   namespace: <PROJECT>
 spec:
-  host: compositeop-calculator.apps.bank01.com
+  host: <DOMAIN>
   path: /compositeop/mean
   port:
     targetPort: 8080-tcp
@@ -24,7 +24,7 @@ metadata:
   name: compositeop-square
   namespace: <PROJECT>
 spec:
-  host: compositeop-calculator.apps.bank01.com
+  host: <DOMAIN>
   path: /compositeop/square
   port:
     targetPort: 8080-tcp
@@ -42,7 +42,7 @@ metadata:
   name: compositeop-cube
   namespace: <PROJECT>
 spec:
-  host: compositeop-calculator.apps.bank01.com
+  host: <DOMAIN>
   path: /compositeop/cube
   port:
     targetPort: 8080-tcp
@@ -60,7 +60,7 @@ metadata:
   name: compositeop-eval
   namespace: <PROJECT>
 spec:
-  host: compositeop-calculator.apps.bank01.com
+  host: <DOMAIN>
   path: /compositeop/eval
   port:
     targetPort: 8080-tcp
@@ -78,7 +78,7 @@ metadata:
   name: compositeop-evalrpnexpr
   namespace: <PROJECT>
 spec:
-  host: compositeop-calculator.apps.bank01.com
+  host: <DOMAIN>
   path: /compositeop/evalrpnexpr
   port:
     targetPort: 8080-tcp

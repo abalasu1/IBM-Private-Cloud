@@ -6,7 +6,7 @@ metadata:
   name: multiply
   namespace: <PROJECT>
 spec:
-  host: multiply-calculator.apps.bank01.com
+  host: <DOMAIN>
   path: /basicop/multiply
   port:
     targetPort: 8080-tcp
