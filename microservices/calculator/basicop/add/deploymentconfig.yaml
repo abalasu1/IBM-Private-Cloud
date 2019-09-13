@@ -4,7 +4,7 @@ metadata:
   labels:
     app: add
   annotations:
-    istio-inject: <AUTOINJECT>
+    sidecar.istio.io/inject: <AUTOINJECT>
   name: add
   namespace: <PROJECT>
 spec:
