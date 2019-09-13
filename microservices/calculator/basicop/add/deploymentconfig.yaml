@@ -3,6 +3,8 @@ kind: DeploymentConfig
 metadata:
   labels:
     app: add
+  annotations:
+    istio-inject: <AUTOINJECT>
   name: add
   namespace: <PROJECT>
 spec:
