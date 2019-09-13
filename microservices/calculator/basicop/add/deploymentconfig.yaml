@@ -6,8 +6,6 @@ metadata:
   name: add
   namespace: <PROJECT>
 spec:
-  annotations:
-    sidecar.istio.io/inject: "<AUTOINJECT>"
   replicas: 1
   selector:
     deploymentconfig: add
@@ -24,7 +22,7 @@ spec:
     metadata:
       labels:
         app: add
-        deploymentconfig: add
+        deploymentconfig: add       
     spec:
       containers:
       - image: <CONTAINER>

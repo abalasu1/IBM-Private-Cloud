@@ -1,11 +1,7 @@
 PROJECT=calculator
 DOCKERREPOSITORY=docker-registry.default.svc:5000
 
-PROXYNODE=9.30.140.180
-PROXY=$(PROXYNODE):$(shell kubectl get svc istio-ingressgateway -n istio-system -o json | jq .spec.ports[1].nodePort)
-UIPROXY=$(PROXYNODE):$(shell kubectl get svc istio-ingressgateway -n istio-system -o json | jq .spec.ports[1].nodePort)
-
-SUBDOMAIN=apps.158.176.125.166.xip.io
+SUBDOMAIN=apps.9.30.140.180.xip.io
 
 BASICOPADD=$(DOCKERREPOSITORY)/$(PROJECT)/add
 BASICOPSUB=$(DOCKERREPOSITORY)/$(PROJECT)/subtract
@@ -26,39 +22,6 @@ init:
 clean:
 	-bash -c 'oc delete project $(PROJECT)'
 
-init-mesh:
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/gateway.yaml  | oc apply -f -
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/destinationrules.yaml  | oc apply -f -	
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/virtualservice.yaml  | oc apply -f -	
-
-test-msub:
-	-bash -c 'basicop/subtract/test.sh $(PROXY)'
-
-test-mmul:
-	-bash -c 'basicop/multiply/test.sh $(PROXY)'
-
-test-mdiv:
-	-bash -c 'basicop/divide/test.sh $(PROXY)'
-
-test-mcompositeop:
-	-bash -c 'compositeop/test.sh $(PROXY)'
-
-test-mprocessor:
-	-bash -c 'processor/test.sh $(PROXY)'	
-
-JAEGER_POD_NAME=$(shell kubectl get pod -n istio-system -l app=jaeger -o jsonpath='{.items[0].metadata.name}')
-KIALI_POD_NAME=$(shell kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}')
-GRAFANA_POD_NAME=$(shell kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}')
-PROMETHEUS_POD_NAME=$(shell kubectl -n istio-system get pod -l app=prometheus -o jsonpath='{.items[0].metadata.name}')
-
-monitor-mesh:
-	$(shell kubectl -n istio-system port-forward $(JAEGER_POD_NAME) 16686:16686 & kubectl -n istio-system port-forward $(KIALI_POD_NAME) 20001:20001 & kubectl -n istio-system port-forward $(GRAFANA_POD_NAME) 3000:3000 & kubectl -n istio-system port-forward $(PROMETHEUS_POD_NAME) 9090:9090)
-
-clean-mesh:
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/gateway.yaml  | oc delete -f -
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/destinationrules.yaml  | oc delete -f -	
-	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./istio/virtualservice.yaml  | oc delete -f -
-
 init-add:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/service.yaml  | oc apply -f -
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<DOMAIN>~add.$(SUBDOMAIN)~g' ./basicop/add/route.yaml  | oc apply -f -
@@ -69,19 +32,16 @@ build-add:
 	oc start-build add
 
 deploy-add:
-	-sed -e 's~<CONTAINER>~$(BASICOPADD)~g' -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<AUTOINJECT>~false~g' ./basicop/add/deploymentconfig.yaml  | oc apply -f -
+	-sed -e 's~<CONTAINER>~$(BASICOPADD)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/deploymentconfig.yaml  | oc apply -f -
 
 deploy-madd:
-	-sed -e 's~<CONTAINER>~$(BASICOPADD)~g' -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<AUTOINJECT>~true~g' ./basicop/add/deploymentconfig.yaml  | oc apply -f -
+	-sed -e 's~<CONTAINER>~$(BASICOPADD)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/add/deployment.yaml  | oc apply -f -
 
 clean-add:
 	-oc delete all -l app=add
 
 test-add:
 	-bash -c 'basicop/add/test.sh add.$(SUBDOMAIN)'
-
-test-madd:
-	-bash -c 'basicop/add/test.sh $(PROXY)'
 
 init-subtract:
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./basicop/subtract/service.yaml  | oc apply -f -
@@ -174,6 +134,9 @@ test-processor:
 	-bash -c 'processor/test.sh processor.$(SUBDOMAIN)'	
 
 init-ui:
+	-sed -e 's~<PROXY>~processor.$(SUBDOMAIN)~g' ./ui/src/environments/environment.ts.template > ./ui/src/environments/environment.ts
+	-sed -e 's~<PROXY>~processor.$(SUBDOMAIN)~g' ./ui/src/environments/environment.prod.ts.template > ./ui/src/environments/environment.prod.ts	
+
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./ui/service.yaml  | oc apply -f -
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<DOMAIN>~ui.$(SUBDOMAIN)~g' ./ui/route.yaml  | oc apply -f -	
 

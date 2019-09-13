@@ -35,13 +35,14 @@ spec:
         - name: VERSION
           value: "v1"
         - name: ADDURI
-          value: "http://add/basicop/add"
+          value: "http://add:8080/basicop/add"
         - name: SUBURI
-          value: "http://subtract/basicop/subtract"
+          value: "http://subtract:8080/basicop/subtract"
         - name: MULURI
-          value: "http://multiply/basicop/multiply"
+          value: "http://multiply:8080/basicop/multiply"
         - name: DIVURI
-          value: "http://divide/basicop/divide"          
+          value: "http://divide:8080/basicop/divide"
+
   test: false
   triggers:
   - imageChangeParams:
