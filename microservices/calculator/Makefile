@@ -1,7 +1,7 @@
 PROJECT=calculator
 DOCKERREPOSITORY=docker-registry.default.svc:5000
 
-SUBDOMAIN=apps.9.30.140.180.xip.io
+SUBDOMAIN=apps.158.176.134.149.xip.io
 
 BASICOPADD=$(DOCKERREPOSITORY)/$(PROJECT)/add
 BASICOPSUB=$(DOCKERREPOSITORY)/$(PROJECT)/subtract
@@ -134,8 +134,8 @@ test-processor:
 	-bash -c 'processor/test.sh processor.$(SUBDOMAIN)'	
 
 init-ui:
-	-sed -e 's~<PROXY>~processor.$(SUBDOMAIN)~g' ./ui/src/environments/environment.ts.template > ./ui/src/environments/environment.ts
-	-sed -e 's~<PROXY>~processor.$(SUBDOMAIN)~g' ./ui/src/environments/environment.prod.ts.template > ./ui/src/environments/environment.prod.ts	
+	-bash -c 'oc create serviceaccount ui-sa -n $(PROJECT) --as system:admin'
+	-bash -c 'oc adm policy add-scc-to-user anyuid -z ui-sa -n $(PROJECT) --as system:admin'
 
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' ./ui/service.yaml  | oc apply -f -
 	-sed -e 's~<PROJECT>~$(PROJECT)~g' -e 's~<DOMAIN>~ui.$(SUBDOMAIN)~g' ./ui/route.yaml  | oc apply -f -	
@@ -149,7 +149,8 @@ deploy-ui:
 	-sed -e 's~<CONTAINER>~$(UI)~g' -e 's~<PROJECT>~$(PROJECT)~g' ./ui/deploymentconfig.yaml  | oc apply -f -
 	
 clean-ui:
-	-oc delete all -l app=ui	
+	-oc delete sa ui-sa
+	-oc delete all -l app=ui
 
 init-all: init init-add init-subtract init-multiply init-divide init-compositeop init-processor init-ui
 build-all: build-add build-subtract build-multiply build-divide build-compositeop build-processor build-ui

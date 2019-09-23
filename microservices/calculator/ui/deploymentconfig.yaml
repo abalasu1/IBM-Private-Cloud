@@ -24,6 +24,7 @@ spec:
         app: ui
         deploymentconfig: ui
     spec:
+      serviceAccountName: ui-sa
       containers:
       - image: <CONTAINER>
         imagePullPolicy: Always
